@@ -1,3 +1,1 @@
-Build image with docker build -t <image name> .
-Push to your image repo
-Deploy with kubectl create deployment exercise1-2 --image=<image repo>
+Deploy with kubectl apply -f manifests/deployment.yaml
