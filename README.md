@@ -3,3 +3,4 @@
 - [1.1] https://github.com/Syncopated90/KubernetesSubmissions/releases/tag/1_1
 - [1.2] https://github.com/Syncopated90/KubernetesSubmissions/tree/1.2
 - [1.3] https://github.com/Syncopated90/KubernetesSubmissions/tree/1.3
+- [1.4] https://github.com/Syncopated90/KubernetesSubmissions/tree/1.4
