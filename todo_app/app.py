@@ -1,4 +1,4 @@
-import os
+import os, random, string
 import logging
 from flask import Flask
 import sys
@@ -6,14 +6,17 @@ import sys
 cli = sys.modules['flask.cli']
 cli.show_server_banner = lambda *x: None
 
+def random_hash():
+    return ''.join(random.choices(string.ascii_letters + string.digits, k = 16))
 
 app = Flask(__name__)
 log = logging.getLogger('werkzeug')
 log.disabled = True
+process_hash = random_hash()
 
 @app.route("/")
-def hello_world():
-    return "<p>Hello, World!</p>"
+def index():
+    return (f'<div>Process hash:{process_hash} </div> <div>New hash: {random_hash()}</div>')
 
 #is run by PORT=1234 python app.py to open on port 8000
 if __name__ == '__main__':

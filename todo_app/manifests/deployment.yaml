@@ -14,4 +14,4 @@ spec:
     spec:
       containers:
         - name: todo
-          image: syncopated1/todo_app_1_2
+          image: syncopated1/todo_app:1.5
