@@ -5,18 +5,14 @@ from flask import Flask
 log_output = Flask(__name__)
 def main():
     logger()
-def random_hash():
-    return ''.join(random.choices(string.ascii_letters + string.digits, k = 16))
-
-def logger():
-    while(True):
-        sleep(5)
-        random_string = ''.join(random.choices(string.ascii_letters + string.digits, k = 16))
-        print(str(datetime.datetime.now()) + ': ' + random_string)
 
 @log_output.route("/")
 def index():
-    return (f'<div>New hash: {random_hash()}</div>')
+    filename = "files/logged.txt"
+    os.makedirs(os.path.dirname(filename), exist_ok=True)
+    with open(filename, "r+") as log_file:
+        return f'<div>{log_file.read()}</div>'    
+    return (f'<div>no log found</div>')
 
 #Opens on port 8001
 if __name__ == "__main__":

@@ -1,0 +1,1 @@
+Writes current time + hash to file, run with python logwriter.py or through docker.

@@ -12,6 +12,17 @@ spec:
       labels:
         app: log-output
     spec:
+      volumes:
+       - name: shared-log
+         emptyDir: {}
       containers:
         - name: log-output
-          image: syncopated1/log_output:1.1
+          image: syncopated1/log_output:1.2
+          volumeMounts:
+          - name: shared-log
+            mountPath: /usr/src/app/files
+        - name: logwriter
+          image: syncopated1/logwriter:1.0
+          volumeMounts:
+          - name: shared-log
+            mountPath: /usr/src/app/files
