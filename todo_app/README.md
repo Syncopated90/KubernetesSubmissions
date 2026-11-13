@@ -1,2 +1,4 @@
-Deploy with kubectl apply -f manifests/deployment.yaml
-Port forward with kubectl port-forward todo-dep-55f78cd7bf-kml6f 8080:8000
+Create cluster with k3d cluster create --port 8082:30080@agent:0 -p 8081:80@loadbalancer --agents 2
+Deploy with kubectl apply -f manifests/deployment.yaml and
+kubectl apply -f manifests/service.yaml.
+Access app on localhost port 8082.
