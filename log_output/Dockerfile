@@ -2,4 +2,5 @@ FROM python:3.16.0a2-alpine3.23
 WORKDIR /usr/src/app
 COPY . .
 ENV PYTHONUNBUFFERED=1
-CMD ["python", "1_1.py"]
+RUN pip install Flask
+CMD ["python", "log_output.py"]
