@@ -18,7 +18,7 @@ process_hash = random_hash()
 def index():
     return (f'<div>Process hash:{process_hash} </div> <div>New hash: {random_hash()}</div>')
 
-#is run by PORT=1234 python app.py to open on port 8000
+#is run by PORT=1234 python app.py to open on port 1234
 if __name__ == '__main__':
     if os.environ.get('PORT') is not None:
         print("Server started in port " + str(os.environ['PORT']))
