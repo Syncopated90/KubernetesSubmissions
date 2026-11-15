@@ -13,16 +13,19 @@ spec:
         app: log-output
     spec:
       volumes:
-       - name: shared-log
-         emptyDir: {}
+       #- name: shared-log
+       #  emptyDir: {}
+       - name: log-pv
+         persistentVolumeClaim:
+          claimName: log-claim
       containers:
         - name: log-output
-          image: syncopated1/log_output:1.2
+          image: syncopated1/log_output:1.4
           volumeMounts:
-          - name: shared-log
+          - name: log-pv
             mountPath: /usr/src/app/files
-        - name: logwriter
-          image: syncopated1/logwriter:1.0
-          volumeMounts:
-          - name: shared-log
-            mountPath: /usr/src/app/files
+        #- name: logwriter
+         # image: syncopated1/logwriter:1.0
+          #volumeMounts:
+          #- name: shared-log
+           # mountPath: /usr/src/app/files

@@ -8,6 +8,11 @@ ping = 0
 def ping_pong():
     global ping
     ping += 1
+
+    filename = "files/logged.txt"
+    os.makedirs(os.path.dirname(filename), exist_ok=True)
+    with open(filename, "w+") as ping_file:
+        ping_file.write(str(ping))
     return (f'<div>pong {ping}</div>')
 
 #is run by PORT=1234 python app.py to open on port 1234
