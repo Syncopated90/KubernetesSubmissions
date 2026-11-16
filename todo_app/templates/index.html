@@ -11,5 +11,15 @@
 <body>
     <h2 >Welcome to the todo app</h2>
     <div><img src="{{image}}"></div>
+    <div>
+        Current todo's:
+        {% for todo in todo_list %}
+        <div>{{todo}}</div>
+        {% endfor %}
+    </div>
+    <div><form method="POST">
+        <input name="text" maxlength="140">
+        <input type="submit">
+    </form></div>
 </body>
 </html>

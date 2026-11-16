@@ -1,6 +1,6 @@
 import os, random, string, datetime
 import logging
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, request
 import sys
 from pathlib import Path
 from shutil import copyfileobj
@@ -20,15 +20,21 @@ log = logging.getLogger('werkzeug')
 log.disabled = True
 download_image("https://picsum.photos/1200", os.path.join(app.static_folder, "image.jpg"))
 image_time = datetime.datetime.now()
+todo_list = ["make bed", "buy more coffee", "feed the cat"]
 
 @app.route("/")
 def index():
     global image_time
-    print((image_time - datetime.timedelta(minutes=10)))
     if (image_time + datetime.timedelta(minutes=10)) < datetime.datetime.now():
         image_time = datetime.datetime.now()
         download_image("https://picsum.photos/1200", os.path.join(app.static_folder, "image.jpg"))
-    return render_template("index.html", image=url_for("static", filename="image.jpg"))
+    return render_template("index.html", image=url_for("static", filename="image.jpg"), todo_list = todo_list)
+
+@app.route('/', methods=['POST'])
+def index_post():
+    text = request.form['text']
+    print(text)
+    return render_template("index.html", image=url_for("static", filename="image.jpg"), todo_list = todo_list)
     
 #is run by PORT=1234 python app.py to open on port 1234
 if __name__ == '__main__':
