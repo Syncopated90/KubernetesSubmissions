@@ -1,3 +1,6 @@
+How to run the project:
+-Go into the todo_app directory and follow the readme there.
+
 # Exercise submissions for Devops with Kubernetes on MOOC.fi, from Helsinki university
 ## Chapter 2
 - [1.1] https://github.com/Syncopated90/KubernetesSubmissions/releases/tag/1_1
@@ -12,3 +15,4 @@
 - [1.10] https://github.com/Syncopated90/KubernetesSubmissions/tree/1.10
 - [1.11] https://github.com/Syncopated90/KubernetesSubmissions/tree/1.11
 - [1.12] https://github.com/Syncopated90/KubernetesSubmissions/tree/1.12
+- [1.13] https://github.com/Syncopated90/KubernetesSubmissions/tree/1.13
