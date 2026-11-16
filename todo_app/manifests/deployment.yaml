@@ -12,6 +12,13 @@ spec:
       labels:
         app: todo
     spec:
+      volumes:
+        - name: image-pv
+          persistentVolumeClaim:
+            claimName: image-claim
       containers:
         - name: todo
-          image: syncopated1/todo_app:1.5
+          image: syncopated1/todo_app:1.6
+          volumeMounts:
+          - name: image-pv
+            mountPath: /usr/src/app/static
