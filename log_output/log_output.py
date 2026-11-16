@@ -1,20 +1,20 @@
 from time import sleep
 import os, random, string, datetime
 from flask import Flask
+import requests
 
 log_output = Flask(__name__)
-def main():
-    logger()
+
 def random_hash():
     return ''.join(random.choices(string.ascii_letters + string.digits, k = 16))
 def date_and_hash():
     return str(datetime.datetime.now()) + ': ' + random_hash()
+
 @log_output.route("/")
 def index():
-    filename = "files/logged.txt"
-    os.makedirs(os.path.dirname(filename), exist_ok=True)
-    with open(filename, "r+") as ping_file:
-        ping = ping_file.read()
+    response = requests.get('http://pingpong-svc:2345/pingpong')
+    print(response.text)
+    ping = response.text
     return (f'<div>{date_and_hash()}</div><div>Ping / pongs: {ping}</div>')
 
 #Opens on port 8001
