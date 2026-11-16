@@ -1,10 +1,11 @@
 import os, random, string, datetime
 import logging
-from flask import Flask, render_template, url_for, request
+from flask import Flask, render_template, redirect, url_for, request
 import sys
 from pathlib import Path
 from shutil import copyfileobj
 from urllib.request import urlopen
+import requests
 
 cli = sys.modules['flask.cli']
 cli.show_server_banner = lambda *x: None
@@ -24,17 +25,21 @@ todo_list = ["make bed", "buy more coffee", "feed the cat"]
 
 @app.route("/")
 def index():
-    global image_time
+    global image_time, todo_list
     if (image_time + datetime.timedelta(minutes=10)) < datetime.datetime.now():
         image_time = datetime.datetime.now()
         download_image("https://picsum.photos/1200", os.path.join(app.static_folder, "image.jpg"))
+    backend_response = requests.get('http://todo-backend-svc:2345/get-todo-list')
+    todo_list = backend_response.json()
     return render_template("index.html", image=url_for("static", filename="image.jpg"), todo_list = todo_list)
 
 @app.route('/', methods=['POST'])
 def index_post():
     text = request.form['text']
     print(text)
-    return render_template("index.html", image=url_for("static", filename="image.jpg"), todo_list = todo_list)
+    requests.post('http://todo-backend-svc:2345/post-todo-item', data={'text':text})
+    return redirect(url_for('index'))
+    #return render_template("index.html", image=url_for("static", filename="image.jpg"), todo_list = todo_list)
     
 #is run by PORT=1234 python app.py to open on port 1234
 if __name__ == '__main__':

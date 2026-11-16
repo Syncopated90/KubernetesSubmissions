@@ -17,5 +17,6 @@ How to run the project:
 - [1.12] https://github.com/Syncopated90/KubernetesSubmissions/tree/1.12
 - [1.13] https://github.com/Syncopated90/KubernetesSubmissions/tree/1.13
 ## Chapter 3
-- [2.1] https://github.com/Syncopated90/KubernetesSubmissions/releases/tag/2.1
+- [2.1] https://github.com/Syncopated90/KubernetesSubmissions/tree/2.1
+- [2.2] https://github.com/Syncopated90/KubernetesSubmissions/tree/2.2
 

@@ -18,7 +18,7 @@ spec:
             claimName: image-claim
       containers:
         - name: todo
-          image: syncopated1/todo_app:1.7
+          image: syncopated1/todo_app:1.9
           volumeMounts:
           - name: image-pv
             mountPath: /usr/src/app/static
