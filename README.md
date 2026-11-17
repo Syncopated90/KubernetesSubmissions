@@ -19,4 +19,5 @@ How to run the project:
 ## Chapter 3
 - [2.1] https://github.com/Syncopated90/KubernetesSubmissions/tree/2.1
 - [2.2] https://github.com/Syncopated90/KubernetesSubmissions/tree/2.2
+- [2.3] https://github.com/Syncopated90/KubernetesSubmissions/tree/2.3
 
