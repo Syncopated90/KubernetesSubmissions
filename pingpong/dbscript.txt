@@ -1,0 +1,10 @@
+Connect with 
+kubectl exec -it db-sts-0 -- shkubectl exec -it db-sts-0 -- sh
+psql -d postgres -U postgres
+\c pings
+\l to list databases
+CREATE DATABASE pings;
+CREATE TABLE ping_nr(
+    ping_id SERIAL PRIMARY KEY, 
+    pings int NOT NULL
+);

@@ -19,7 +19,7 @@ spec:
             claimName: image-claim
       containers:
         - name: todo
-          image: syncopated1/todo_app:1.11
+          image: syncopated1/todo_app:1.12
           envFrom:
           - configMapRef:
               name: todo-configmap
