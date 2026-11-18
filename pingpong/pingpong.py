@@ -8,7 +8,7 @@ ping = 0
 def ping_pong():
     global ping
     ping += 1
-    return (f'<div>pong {ping}</div>')
+    return (f'pong {ping}')
 
 @pingpong.route("/pings")
 def ping_number():

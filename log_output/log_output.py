@@ -13,11 +13,17 @@ def date_and_hash():
 @log_output.route("/")
 def index():
     response = requests.get('http://pingpong-svc:2345/pingpong')
-    print(response.text)
     ping = response.text
-    return (f'<div>{date_and_hash()}</div><div>Ping / pongs: {ping}</div>')
+    #ping = 4
+    filename = "config/information.txt"
+    #os.makedirs(os.path.dirname(filename), exist_ok=True)
+    with open(filename, "r") as message_file:
+        message = message_file.read()
+    return (f'<div>Env variable: {message}</div>\
+            <div>{date_and_hash()}</div><div>Ping / pongs: {ping}</div>\
+                ')
 
-#Opens on port 8001
+#Opens on port 8000
 if __name__ == "__main__":
     if os.environ.get('PORT') is not None:
         print("Server started in port " + str(os.environ['PORT']))
