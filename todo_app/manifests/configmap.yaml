@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: todo-configmap
+  namespace: project
+data:
+  PORT: "8000"
+  PICSUM_URL: "https://picsum.photos/1200"
+  GET_TODO_LIST_URL: 'http://todo-backend-svc:2345/get-todo-list'
+  POST_TODO_ITEM_URL: 'http://todo-backend-svc:2345/post-todo-item'

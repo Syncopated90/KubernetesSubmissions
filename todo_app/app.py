@@ -9,7 +9,15 @@ import requests
 
 cli = sys.modules['flask.cli']
 cli.show_server_banner = lambda *x: None
-
+print(os.environ)
+if 'GET_TODO_LIST_URL' not in os.environ:
+    os.environ['GET_TODO_LIST_URL'] = 'http://localhost:8000/get-todo-list'
+if 'POST_TODO_ITEM_URL' not in os.environ:
+    os.environ['POST_TODO_ITEM_URL'] = 'http://localhost:8000/post-todo-item'
+if 'PICSUM_URL' not in os.environ:
+    os.environ['PICSUM_URL'] = "https://picsum.photos/1200"
+if 'PORT' not in os.environ:
+    os.environ['PORT'] = "8001"
 def download_image(url, destination):
     destination = Path(destination)
     destination.parent.mkdir(parents=True, exist_ok=True)
@@ -19,7 +27,7 @@ def download_image(url, destination):
 app = Flask(__name__)
 log = logging.getLogger('werkzeug')
 log.disabled = True
-download_image("https://picsum.photos/1200", os.path.join(app.static_folder, "image.jpg"))
+download_image(os.environ.get('PICSUM_URL'), os.path.join(app.static_folder, "image.jpg"))
 image_time = datetime.datetime.now()
 todo_list = ["make bed", "buy more coffee", "feed the cat"]
 
@@ -28,8 +36,8 @@ def index():
     global image_time, todo_list
     if (image_time + datetime.timedelta(minutes=10)) < datetime.datetime.now():
         image_time = datetime.datetime.now()
-        download_image("https://picsum.photos/1200", os.path.join(app.static_folder, "image.jpg"))
-    backend_response = requests.get('http://todo-backend-svc:2345/get-todo-list')
+        download_image(os.environ.get('PICSUM_URL'), os.path.join(app.static_folder, "image.jpg"))
+    backend_response = requests.get(os.environ.get("GET_TODO_LIST_URL"))
     todo_list = backend_response.json()
     return render_template("index.html", image=url_for("static", filename="image.jpg"), todo_list = todo_list)
 
@@ -37,13 +45,14 @@ def index():
 def index_post():
     text = request.form['text']
     print(text)
-    requests.post('http://todo-backend-svc:2345/post-todo-item', data={'text':text})
+    requests.post(os.environ.get('POST_TODO_ITEM_URL'), data={'text':text})
     return redirect(url_for('index'))
     #return render_template("index.html", image=url_for("static", filename="image.jpg"), todo_list = todo_list)
     
 #is run by PORT=1234 python app.py to open on port 1234
 if __name__ == '__main__':
     if os.environ.get('PORT') is not None:
+        print("Started server from env var PORT")
         print("Server started in port " + str(os.environ['PORT']))
         app.run(host="0.0.0.0", port=os.environ['PORT'])
     else:
