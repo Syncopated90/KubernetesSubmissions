@@ -1,5 +1,5 @@
 Connect with 
-kubectl exec -it db-sts-0 -- shkubectl exec -it db-sts-0 -- sh
+kubectl exec -it db-sts-0 -- sh
 psql -d postgres -U postgres
 \c pings
 \l to list databases

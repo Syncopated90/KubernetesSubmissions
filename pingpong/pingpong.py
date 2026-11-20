@@ -12,6 +12,7 @@ def connect_to_db():
         password= os.environ["DB_PASSWORD"]
     )
     return conn
+
 def store_pings(pings, conn):
     cur = conn.cursor()
     cur.execute("UPDATE ping_nr SET pings = %s WHERE ping_id = 1;", (pings,))
@@ -21,6 +22,7 @@ def get_pings(conn):
     cur = conn.cursor()
     cur.execute("SELECT pings FROM ping_nr")
     return cur.fetchall()
+
 @pingpong.route("/pingpong")
 def ping_pong():
     if "DB_HOST" not in os.environ:

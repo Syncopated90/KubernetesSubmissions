@@ -1,0 +1,13 @@
+Connect with 
+kubectl exec -it db-sts-0 -- sh
+psql -d postgres -U postgres
+\c pings
+\l to list databases
+CREATE DATABASE Todo;
+CREATE TABLE Todos(
+    todo_id SERIAL PRIMARY KEY, 
+    todo VARCHAR(200) NOT NULL
+);
+INSERT INTO Todos (todo) VALUES ('buy toothpaste');
+INSERT INTO Todos (todo) VALUES ('feed the cats');
+

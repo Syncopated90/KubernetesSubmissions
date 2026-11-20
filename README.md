@@ -24,4 +24,5 @@ How to run the project:
 - [2.5] https://github.com/Syncopated90/KubernetesSubmissions/tree/2.5
 - [2.6] https://github.com/Syncopated90/KubernetesSubmissions/tree/2.6
 - [2.7] https://github.com/Syncopated90/KubernetesSubmissions/tree/2.7
+- [2.8] https://github.com/Syncopated90/KubernetesSubmissions/tree/2.8
 

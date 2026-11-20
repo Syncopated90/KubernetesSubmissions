@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: db-sts
+  namespace: project
+spec:
+  serviceName: todo-db-svc
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tododb
+  template:
+    metadata:
+      labels:
+        app: tododb
+    spec:
+      containers:
+        - name: tododb
+          image: postgres:19rc2-alpine
+          env:
+            - name: DB_PASSWORD # ENV name passed to container
+              valueFrom:
+                secretKeyRef:
+                  name: db-password
+                  key: DB_PASSWORD # ENV name in the secret
+          envFrom:
+          - configMapRef:
+              name: db-configmap
+          ports:
+            - name: db
+              containerPort: 5432
+          volumeMounts:
+            - name: postgres-data-storage
+              mountPath: /data
+  volumeClaimTemplates:
+    - metadata:
+        name: postgres-data-storage
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: local-path
+        resources:
+          requests:
+            storage: 100Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: todo-db-svc
+  namespace: project
+spec:
+  ports:
+  - port: 5432
+    name: db
+    #targetPort: 5432
+    protocol: TCP
+  clusterIP: None
+  selector:
+   app: tododb
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: db-configmap
+  namespace: project
+data:
+  POSTGRES_PASSWORD: "postgres"
+  POSTGRES_USER: "postgres"

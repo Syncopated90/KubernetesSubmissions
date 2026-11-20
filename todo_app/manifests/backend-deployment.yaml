@@ -4,6 +4,7 @@ metadata:
   name: todo-backend-dep
   namespace: project
 spec:
+  revisionHistoryLimit: 2
   replicas: 1
   selector:
     matchLabels:
@@ -15,4 +16,24 @@ spec:
     spec:
       containers:
         - name: todo-backend
-          image: syncopated1/todo_backend:1.1
+          image: syncopated1/todo_backend:1.33
+          envFrom:
+          - configMapRef:
+              name: backend-configmap
+          env:
+            - name: DB_PASSWORD # ENV name passed to container
+              valueFrom:
+                secretKeyRef:
+                  name: db-password
+                  key: DB_PASSWORD # ENV name in the secret
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backend-configmap
+  namespace: project
+data:
+  PORT: "8000"
+  DB_HOST: "todo-db-svc.project.svc.cluster.local"
+  DB_NAME: "todo"
+  DB_USER: "postgres"
