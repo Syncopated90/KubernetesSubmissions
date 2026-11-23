@@ -1,0 +1,55 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: urldlcron
+spec:
+  schedule: "19 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: todo-job
+          containers:
+          - name: urldlcron
+            image: syncopated1/random_wiki_url_downloader:1.0
+            imagePullPolicy: IfNotPresent
+            env:
+              - name: DB_PASSWORD # ENV name passed to container
+                valueFrom:
+                  secretKeyRef:
+                    name: db-password
+                    key: DB_PASSWORD # ENV name in the secret
+          restartPolicy: OnFailure
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: todo-job
+  namespace: project
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: todo-job-pod-access
+  namespace: project
+rules:
+  - apiGroups: [""]
+    resources: ["pods"]
+    verbs: ["get"]
+  - apiGroups: [""]
+    resources: ["pods/exec"]
+    verbs: ["create"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: todo-job-pod-access
+  namespace: project
+subjects:
+  - kind: ServiceAccount
+    name: todo-job
+    namespace: project
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: todo-job-pod-access
