@@ -44,6 +44,9 @@ def post_lists():
     conn = connect_to_db()
     todo_added = request.form['text']
     print(todo_added)
+    if len(todo_added) > 140:
+        print(f"Last todo was too long at {len(todo_added)} characters.")
+        return jsonify(success=False)
     store_todo(conn, todo_added)
     conn.close()
     return jsonify(success=True)
@@ -55,5 +58,3 @@ if __name__ == '__main__':
     else:
         print("Server started in port 8000")
         todo_backend.run(host="0.0.0.0", port=8000)
-
-#TODO write correct sql calls from this part and it should work?

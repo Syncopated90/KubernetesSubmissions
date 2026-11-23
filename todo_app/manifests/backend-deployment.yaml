@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: todo-backend
-          image: syncopated1/todo_backend:1.33
+          image: syncopated1/todo_backend:1.4
           envFrom:
           - configMapRef:
               name: backend-configmap
