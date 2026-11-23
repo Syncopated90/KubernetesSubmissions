@@ -1,6 +1,7 @@
 How to run the project:
 - Go into the todo_app directory and follow the readme there.
 
+Setup monitoring: follow the readme in monitoring/.
 # Exercise submissions for Devops with Kubernetes on MOOC.fi, from Helsinki university
 ## Chapter 2
 - [1.1] https://github.com/Syncopated90/KubernetesSubmissions/releases/tag/1_1
