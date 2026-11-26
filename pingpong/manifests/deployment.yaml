@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: pingpong
-          image: syncopated1/pingpong:1.14
+          image: syncopated1/pingpong:1.15
           envFrom:
           - configMapRef:
               name: pingpong-configmap

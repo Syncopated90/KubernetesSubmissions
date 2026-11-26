@@ -15,7 +15,10 @@ spec:
     spec:
       containers:
         - name: log-output
-          image: syncopated1/log_output:1.8
+          image: syncopated1/log_output:1.91
+          envFrom:
+          - configMapRef:
+              name: log-urls-configmap
           volumeMounts:
           - name: config
             mountPath: "usr/src/app/config"
@@ -26,4 +29,12 @@ spec:
               name: log-configmap
               items:
               - key: "information.txt"
-                path: "information.txt"   
+                path: "information.txt"  
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: log-urls-configmap
+  namespace: exercises
+data:
+  PINGPONG_URL: "http://pingpong-svc.exercises.svc.cluster.local:2345/pingpong"

@@ -12,7 +12,8 @@ def date_and_hash():
 
 @log_output.route("/")
 def index():
-    response = requests.get('http://pingpong-svc:2345/pingpong')
+    print(os.environ['PINGPONG_URL'])
+    response = requests.get(os.environ['PINGPONG_URL'])
     ping = response.text
     #ping = 4
     filename = "config/information.txt"

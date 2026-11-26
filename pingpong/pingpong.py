@@ -23,6 +23,10 @@ def get_pings(conn):
     cur.execute("SELECT pings FROM ping_nr")
     return cur.fetchall()
 
+@pingpong.route("/")
+def index():
+    return "Visit /pingpong to send a ping or /pings to look at the number of pings"
+
 @pingpong.route("/pingpong")
 def ping_pong():
     if "DB_HOST" not in os.environ:
@@ -41,7 +45,7 @@ def ping_number():
         ping = 69
         return (f'pong {ping}')
     conn = connect_to_db()
-    ping = get_pings(conn)[0][0]
+    ping = get_pings(conn)[0][0]    
     conn.close()
     return (f"{ping}")
 

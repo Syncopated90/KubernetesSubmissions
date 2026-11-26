@@ -38,3 +38,4 @@ gcloud container clusters delete dwk-cluster --zone=europe-north2-a
 - [2.10] https://github.com/Syncopated90/KubernetesSubmissions/tree/2.10
 ## Chapter 4
 - [3.1] https://github.com/Syncopated90/KubernetesSubmissions/tree/3.1
+- [3.2] https://github.com/Syncopated90/KubernetesSubmissions/tree/3.2
