@@ -2,6 +2,14 @@ How to run the project:
 - Go into the todo_app directory and follow the readme there.
 
 Setup monitoring: follow the readme in monitoring/.
+
+Google Kubernetes Engine:
+Build the cluster with 
+gcloud container clusters create dwk-cluster --zone=europe-north2-a --cluster-version=1.36 --disk-size=32 --num-nodes=2 --machine-type=e2-small
+If necessary, move to the cluster with
+gcloud container clusters get-credentials dwk-cluster --zone=europe-north2-a
+When not in use, delete the cluster with
+gcloud container clusters delete dwk-cluster --zone=europe-north2-a
 # Exercise submissions for Devops with Kubernetes on MOOC.fi, from Helsinki university
 ## Chapter 2
 - [1.1] https://github.com/Syncopated90/KubernetesSubmissions/releases/tag/1_1
@@ -28,4 +36,5 @@ Setup monitoring: follow the readme in monitoring/.
 - [2.8] https://github.com/Syncopated90/KubernetesSubmissions/tree/2.8
 - [2.9] https://github.com/Syncopated90/KubernetesSubmissions/tree/2.9
 - [2.10] https://github.com/Syncopated90/KubernetesSubmissions/tree/2.10
-
+## Chapter 4
+- [3.1] https://github.com/Syncopated90/KubernetesSubmissions/tree/3.1

@@ -8,3 +8,4 @@ CREATE TABLE ping_nr(
     ping_id SERIAL PRIMARY KEY, 
     pings int NOT NULL
 );
+INSERT INTO ping_nr (pings) VALUES (1);

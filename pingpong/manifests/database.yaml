@@ -31,10 +31,21 @@ spec:
         name: postgres-data-storage
       spec:
         accessModes: ["ReadWriteOnce"]
-        storageClassName: local-path
+        storageClassName: db-storage-class
         resources:
           requests:
             storage: 100Mi
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: db-storage-class  # e.g., premium-rwo-wait
+provisioner: pd.csi.storage.gke.io   # Standard GKE CSI Driver
+volumeBindingMode: WaitForFirstConsumer
+allowVolumeExpansion: true
+parameters:
+  type: pd-balanced # Use pd-balanced or pd-ssd for databases
+
 ---
 apiVersion: v1
 kind: Service
