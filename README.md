@@ -3,13 +3,31 @@ How to run the project:
 
 Setup monitoring: follow the readme in monitoring/.
 
+Apply gateway.yaml in the root directory if gateways are used. You also need to setup the relevant databases, scripts for this are found in dbscript.txt in the todo and pingpong directories.
+
 Google Kubernetes Engine:
 Build the cluster with 
+
 gcloud container clusters create dwk-cluster --zone=europe-north2-a --cluster-version=1.36 --disk-size=32 --num-nodes=2 --machine-type=e2-small
+
 If necessary, move to the cluster with
+
 gcloud container clusters get-credentials dwk-cluster --zone=europe-north2-a
+
 When not in use, delete the cluster with
+
 gcloud container clusters delete dwk-cluster --zone=europe-north2-a
+
+To scale down the cluster when not in use, use
+
+gcloud container clusters resize dwk-cluster --node-pool default-pool --num-nodes 0 --zone europe-north2-a
+
+Activate the gateway API with
+
+gcloud container clusters update dwk-cluster --location=europe-north2-a --gateway-api=standard
+
+
+
 # Exercise submissions for Devops with Kubernetes on MOOC.fi, from Helsinki university
 ## Chapter 2
 - [1.1] https://github.com/Syncopated90/KubernetesSubmissions/releases/tag/1_1
@@ -39,3 +57,4 @@ gcloud container clusters delete dwk-cluster --zone=europe-north2-a
 ## Chapter 4
 - [3.1] https://github.com/Syncopated90/KubernetesSubmissions/tree/3.1
 - [3.2] https://github.com/Syncopated90/KubernetesSubmissions/tree/3.2
+- [3.3] https://github.com/Syncopated90/KubernetesSubmissions/tree/3.3
