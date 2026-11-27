@@ -37,4 +37,4 @@ metadata:
   name: log-urls-configmap
   namespace: exercises
 data:
-  PINGPONG_URL: "http://pingpong-svc.exercises.svc.cluster.local:2345/pingpong"
+  PINGPONG_URL: "http://pingpong-svc.exercises.svc.cluster.local:2345/"

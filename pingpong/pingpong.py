@@ -24,10 +24,6 @@ def get_pings(conn):
     return cur.fetchall()
 
 @pingpong.route("/")
-def index():
-    return "Visit /pingpong to send a ping or /pings to look at the number of pings"
-
-@pingpong.route("/pingpong")
 def ping_pong():
     if "DB_HOST" not in os.environ:
         ping = 69
